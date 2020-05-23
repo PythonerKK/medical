@@ -21,6 +21,7 @@ urlpatterns = [
     # User management
     path("users/", include("medical.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
+    path('ckeditor/', include('medical.utils.ckeditor_urls')),
     # Your stuff: custom urls includes go here
 
     # 微信小程序登录

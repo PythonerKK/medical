@@ -10,10 +10,11 @@ class CategoryAdmin:
 
 
 class ArticleAdmin:
-    list_display = ['image_data', 'name', 'description', "normal_price", 'promotion_price', 'sn', 'created_at', 'status']
-    list_filter = ['name', 'description']
-    search_fields = ['name', 'description']
+    list_display = ['title', 'category', 'comment_nums', "read_nums"]
+    list_filter = ['title']
+    search_fields = ['title', 'content']
     ordering = ['-created_at']
 
+
 xadmin.site.register(Category, CategoryAdmin)
-# xadmin.site.register(Medicine, MedicineAdmin)
+xadmin.site.register(Article, ArticleAdmin)
