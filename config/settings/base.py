@@ -312,3 +312,6 @@ JWT_AUTH = {
     #'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(minutes=1),
     #'JWT_ALLOW_REFRESH': True
 }
+#小程序appid
+APPID = env('APPID')
+APPSECRET = env('APPSECRET')
