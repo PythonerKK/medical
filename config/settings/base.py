@@ -73,13 +73,15 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "django_celery_beat",
     "rest_framework",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    "taggit"
 ]
 
 LOCAL_APPS = [
     "medical.users.apps.UsersConfig",
     "medical.xadmin",
-    "medical.medicine.apps.MedicineConfig"
+    "medical.medicine.apps.MedicineConfig",
+    "medical.article.apps.ArticleConfig"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -315,3 +317,39 @@ JWT_AUTH = {
 #小程序appid
 APPID = env('APPID')
 APPSECRET = env('APPSECRET')
+
+
+# aliyun
+PREFIX_URL = 'http://'
+ACCESS_KEY_ID = env('ACCESS_KEY_ID')
+ACCESS_KEY_SECRET = env('ACCESS_KEY_SECRET')
+END_POINT = env('END_POINT')
+BUCKET_NAME = env('BUCKET_NAME')
+#ALIYUN_OSS_CNAME = "" # 自定义域名，如果不需要可以不填写
+BUCKET_ACL_TYPE = env('BUCKET_ACL_TYPE') # private, public-read, public-read-write
+# mediafile将自动上传
+DEFAULT_FILE_STORAGE = 'medical.aliyun_oss2_storage.backends.AliyunMediaStorage'
+# staticfile将自动上传
+#STATICFILES_STORAGE = 'learntime.aliyun_oss2_storage.backends.AliyunStaticStorage'
+ALI_MEDIA_URL = PREFIX_URL + BUCKET_NAME + "." + END_POINT + '/media/'
+
+
+# ckeditor配置
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Undo', "Redo"],
+            ['FontSize', ],
+            ['Bold', 'Italic', 'Underline', 'TextColor'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            # ['Link', 'Unlink'],
+            ['Image', 'Table'],
+            ['Preview', 'Source'],
+
+        ],
+        'height': 300,
+        'width': 730,
+    },
+}
+CKEDITOR_UPLOAD_PATH = 'articles/images/'
