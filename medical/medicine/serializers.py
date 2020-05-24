@@ -18,3 +18,10 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ("id", "name", "medicine_set")
+
+
+class MedicineSerializer(serializers.ModelSerializer):
+    """蛋糕详情序列化"""
+    class Meta:
+        model = Medicine
+        fields = "__all__"

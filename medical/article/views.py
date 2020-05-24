@@ -1,11 +1,9 @@
-from django.shortcuts import render
 
-# Create your views here.
 from rest_framework import mixins, viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from article.serializers import CategorySerializer, ArticleSerializer, ArticleDetailSerializer
+from article.serializers import CategorySerializer, ArticleSerializer, ArticleDetailSerializer, SimpleCategorySerializer
 from medical.article.models import Article, Category
 
 
@@ -38,3 +36,12 @@ class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     """所有类目和文章的api接口"""
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            # 返回所有类别
+            return SimpleCategorySerializer
+        else:
+            # 返回该类别下所有文章
+            return CategorySerializer
+
