@@ -1,7 +1,9 @@
-
-from rest_framework import mixins, viewsets
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import mixins, viewsets, filters
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 from article.serializers import CategorySerializer, ArticleSerializer, ArticleDetailSerializer, SimpleCategorySerializer
 from medical.article.models import Article, Category
@@ -13,8 +15,21 @@ class ArticlePagination(PageNumberPagination):
 
 class ArticleViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet):
+    """
+    list:
+    返回所有文章列表数据
+
+    retrieve:
+    返回文章详情数据
+    """
     pagination_class = ArticlePagination
     queryset = Article.objects.all()
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
+    throttle_classes = (AnonRateThrottle, UserRateThrottle)
+    search_fields = ("title", "content")
+    ordering_fields = ("created_at", "read_nums", "comment_nums")
+    # permission_classes = (IsAuthenticated,)
+
 
     def get_serializer_class(self):
         if self.action == 'list':

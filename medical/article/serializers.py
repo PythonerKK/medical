@@ -11,6 +11,11 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         exclude = ('updated_at',  'category')
+        extra_kwargs = {
+            'title': {
+                'help_text': "文章标题"
+            }
+        }
 
     def get_content(self, obj):
         content = removeHTML(obj.content)

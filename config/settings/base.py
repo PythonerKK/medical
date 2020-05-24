@@ -75,7 +75,8 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "taggit",
-    "ckeditor"
+    "ckeditor",
+    "django_filters"
 ]
 
 LOCAL_APPS = [
@@ -297,7 +298,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication'
     ),
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema'
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '2/minute',
+        'user': '10/minute'
+    }
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
