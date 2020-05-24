@@ -4,13 +4,11 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.documentation import include_docs_urls
 from rest_framework.routers import DefaultRouter
 
 from medical import xadmin
 from medical.users.views import GetOpenIdView, login_or_create_account, UserViewset
-
-router = DefaultRouter()
-router.register('users', UserViewset, basename='users')
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -23,7 +21,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path('ckeditor/', include('medical.utils.ckeditor_urls')),
     # Your stuff: custom urls includes go here
-
+    path('docs/', include_docs_urls(title="接口文档")),
     # 微信小程序登录
     path('api/v1/get-openid/', GetOpenIdView),
     path('api/v1/wx-login/', login_or_create_account),

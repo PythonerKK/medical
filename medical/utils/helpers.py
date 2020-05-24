@@ -1,3 +1,5 @@
+import re
+
 from rest_framework import permissions
 
 
@@ -8,3 +10,9 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         return obj.user == request.user
+
+
+def removeHTML(value):
+    dr = re.compile(r'<[^>]+>', re.S)
+    dd = dr.sub('', value)
+    return dd
