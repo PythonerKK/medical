@@ -1,8 +1,10 @@
 import uuid
 from datetime import datetime
 
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.html import format_html
+from taggit.managers import TaggableManager
 
 from medical.utils.models import CreatedUpdatedMixin
 
@@ -60,14 +62,21 @@ class Medicine(CreatedUpdatedMixin, models.Model):
     )
     name = models.CharField(verbose_name="药品名称", max_length=50)
     category = models.ForeignKey(verbose_name="类别", to=Category, on_delete=models.CASCADE)
-    description = models.TextField(verbose_name="描述")
-    image = models.ImageField(upload_to=upload_to_medicine, verbose_name='商品图片')
+    description = RichTextUploadingField(verbose_name="药品说明书", null=True, blank=True)
+    image = models.ImageField(upload_to=upload_to_medicine, verbose_name='商品图片', blank=True)
     normal_price = models.DecimalField(default=0.00, verbose_name='正价',
                                 max_digits=10, decimal_places=2)
     promotion_price = models.DecimalField(default=0.00, verbose_name='折后价格',
                                 max_digits=10, decimal_places=2)
     sn = models.CharField(verbose_name="药品药监局编号", null=True, blank=True, max_length=20)
     status = models.SmallIntegerField(verbose_name="状态", choices=STATUS, default=1)
+    stock = models.IntegerField(default=0, verbose_name="库存")
+    symptom = models.CharField(verbose_name="病症", null=True, blank=True, max_length=50)
+    sold_num = models.IntegerField(default=0, verbose_name="销量")
+
+    tags = TaggableManager()
+
+
     class Meta:
         verbose_name = "药品"
         verbose_name_plural = verbose_name

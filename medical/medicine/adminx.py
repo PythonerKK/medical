@@ -11,8 +11,8 @@ class CategoryAdmin:
 
 
 class MedicineAdmin:
-    list_display = ['image_data', 'name', 'description', "normal_price", 'promotion_price', 'sn', 'created_at', 'status']
-    list_filter = ['name', 'description']
+    list_display = [ 'name', "normal_price", 'promotion_price', 'stock', 'sold_num', 'symptom', 'status']
+    list_filter = ['status']
     search_fields = ['name', 'description']
     ordering = ['-created_at']
 

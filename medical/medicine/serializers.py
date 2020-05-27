@@ -8,7 +8,8 @@ class MedicineBriefSerializer(serializers.ModelSerializer):
     """药品简要内容序列化"""
     class Meta:
         model = Medicine
-        fields = ('id', 'name', 'description', 'image', "normal_price", "promotion_price", "sn")
+        fields = ('id', 'name', 'image', "normal_price", "promotion_price", "sn",
+                  "stock", "sold_num", 'symptom')
 
 
 
@@ -22,6 +23,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class MedicineSerializer(serializers.ModelSerializer):
     """蛋糕详情序列化"""
+    tags = serializers.SerializerMethodField()
     class Meta:
         model = Medicine
-        fields = "__all__"
+        exclude = ('created_at', 'updated_at')
+
+    def get_tags(self, obj):
+        return ",".join([tag.name for tag in obj.tags.all()])
