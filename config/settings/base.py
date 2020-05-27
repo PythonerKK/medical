@@ -84,7 +84,8 @@ LOCAL_APPS = [
     "medical.xadmin",
     "medical.medicine.apps.MedicineConfig",
     "medical.article.apps.ArticleConfig",
-    "medical.address.apps.AddressConfig"
+    "medical.address.apps.AddressConfig",
+    "medical.queueup.apps.QueueupConfig"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
