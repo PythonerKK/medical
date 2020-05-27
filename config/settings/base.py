@@ -83,7 +83,8 @@ LOCAL_APPS = [
     "medical.users.apps.UsersConfig",
     "medical.xadmin",
     "medical.medicine.apps.MedicineConfig",
-    "medical.article.apps.ArticleConfig"
+    "medical.article.apps.ArticleConfig",
+    "medical.address.apps.AddressConfig"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -360,3 +361,5 @@ CKEDITOR_CONFIGS = {
     },
 }
 CKEDITOR_UPLOAD_PATH = 'articles/images/'
+
+ALIYUN_PREFIX = 'http://gzcc-medical.oss-cn-shenzhen.aliyuncs.com/media/'

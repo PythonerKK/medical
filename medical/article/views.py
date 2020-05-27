@@ -25,7 +25,7 @@ class ArticleViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     pagination_class = ArticlePagination
     queryset = Article.objects.all()
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter)
-    throttle_classes = (AnonRateThrottle, UserRateThrottle)
+    # throttle_classes = (AnonRateThrottle, UserRateThrottle)
     search_fields = ("title", "content")
     ordering_fields = ("created_at", "read_nums", "comment_nums")
     # permission_classes = (IsAuthenticated,)
