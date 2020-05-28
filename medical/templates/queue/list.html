@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+  排队叫号系统
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block javascript %}
+  {{ block.super }}
+  <script>
+    $(function () {
+      $.get("http://152.32.226.171:8000/queue/list/", res => {
+        if (res.code === 200) {
+
+        } else {
+
+        }
+      })
+    })
+  </script>
+{% endblock %}

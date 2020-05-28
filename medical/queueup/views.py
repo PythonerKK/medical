@@ -3,6 +3,7 @@ import json
 from django.conf import settings
 from django.core.cache import cache
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from rest_framework_jwt.settings import api_settings
@@ -78,6 +79,11 @@ def get_queue_list_view(request):
     return response_success_with_data(return_data)
 
 
+@csrf_exempt
+def index_view(request):
+    """排队系统首页列表"""
+
+    return render(request, "queue/list.html")
 
 
 def push(key, value):
