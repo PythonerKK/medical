@@ -18,6 +18,7 @@ urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     # User management
     path("users/", include("medical.users.urls", namespace="users")),
+    path("queue/", include("medical.queueup.urls", namespace="queueup")),
     path("accounts/", include("allauth.urls")),
     path('ckeditor/', include('medical.utils.ckeditor_urls')),
     # Your stuff: custom urls includes go here
